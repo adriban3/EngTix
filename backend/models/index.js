@@ -1,3 +1,1 @@
-module.exports = {
-    Tickets: require('./ticket')
-}
+export {default} from './ticket';
