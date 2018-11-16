@@ -14,7 +14,7 @@ class Requests extends Component {
         //need to setup API and API call here to pull all users from db
         API.getAllRequests()
             .then(res => {
-                console.log(res.data);
+                console.log(res.data)
                 this.setState({tickets: res.data});
                 console.log(this.state.tickets);
             })

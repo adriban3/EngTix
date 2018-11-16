@@ -3,7 +3,7 @@ import './Form.css';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import Checkbox from 'react-bootstrap/lib/Checkbox';
+import Radio from 'react-bootstrap/lib/Radio';
 
 function FieldGroup({ id, label, ...props }) {
     return (
@@ -14,56 +14,71 @@ function FieldGroup({ id, label, ...props }) {
     );
 }
 
-const RequestForm = () => (
+class RequestForm extends React.Component {
+    constructor(props, context) {
+        super(props, context);
 
-    <form>
+        this.handleChange = this.handleChange.bind(this);
 
-        <FieldGroup
-            id="titleInput"
-            type="text"
-            label="Title:"
-            placeholder="Enter Request Title"
-        />
+        this.state = {
+            value: ''
+        };
+    }
 
-        <FieldGroup
-            id="requestorInput"
-            type="text"
-            label="Requestor Name:"
-            placeholder="Enter Your Name"
-        />
+    handleChange(e) {
+        this.setState({value: e.target.value});
+    }
 
-        <FormGroup controlId="formDropdown">
-            <ControlLabel>Location:</ControlLabel>
+    render() {
+        return(
+            <form>
 
-            <FormControl componentClass="select" placeholder="Location">
-                <option value="BUF">BUF</option>
-                <option value="FNO">FNO</option>
-                <option value="LEE">LEE</option>
-                <option value="MDT">MDT</option>
-                <option value="SUW">SUW</option>
-            </FormControl>
+                <FieldGroup
+                    id="titleInput"
+                    type="text"
+                    label="Title:"
+                    placeholder="Enter Request Title"
+                />
 
-        </FormGroup>
+                <FieldGroup
+                    id="requestorInput"
+                    type="text"
+                    label="Requestor Name:"
+                    placeholder="Enter Your Name"
+                />
 
-        <FieldGroup
-            id="ICEScore"
-            type="number"
-            label="ICE Score:"
-            placeholder="Enter Ice Score"
-        />
+                <FormGroup controlId="formDropdown">
+                    <ControlLabel>Location:</ControlLabel>
 
-        <FormGroup>
+                    <FormControl componentClass="select" placeholder="Location">
+                        <option value="BUF">BUF</option>
+                        <option value="FNO">FNO</option>
+                        <option value="LEE">LEE</option>
+                        <option value="MDT">MDT</option>
+                        <option value="SUW">SUW</option>
+                    </FormControl>
 
-            <Checkbox inline>prod</Checkbox>
-            <Checkbox inline>qual</Checkbox>
-            <Checkbox inline>safe</Checkbox>
-            <Checkbox inline>sale</Checkbox>
+                </FormGroup>
 
-        </FormGroup>
+                <FieldGroup
+                    id="ICEScore"
+                    type="number"
+                    label="ICE Score:"
+                    placeholder="Enter Ice Score"
+                />
 
-    </form>
-);
+                <FormGroup>
 
-// render(requestForm);
+                    <Radio name="radioGroup" inline>prod</Radio>
+                    <Radio name="radioGroup" inline>qual</Radio>
+                    <Radio name="radioGroup" inline>safe</Radio>
+                    <Radio name="radioGroup" inline>sale</Radio>
+
+                </FormGroup>
+
+            </form>
+        );
+    }
+}
 
 export default RequestForm;
