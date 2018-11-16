@@ -1,43 +1,44 @@
 import React from 'react';
 import './Modal.css';
 import Modal from 'react-bootstrap/lib/Modal';
-import requestForm from '../Form';
+import Button from 'react-bootstrap/lib/Button';
+import RequestForm from '../Form';
 
 class RequestModal extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+    // constructor(props, context) {
+    //     super(props, context);
 
-        this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+    //     // this.handleShow = this.handleShow.bind(this);
+    //     // this.handleClose = this.handleClose.bind(this);
 
-        this.State = {
-            show: false
-        };
-    }
+    //     // this.state = {
+    //     //     show: this.props.show
+    //     // };
+    // }
 
-    handleClose() {
-        this.setState({ show: false });
-    }
+    // handleClose() {
+    //     this.setState({ show: false });
+    // }
 
-    handleShow() {
-        this.setState({ show: true });
-    }
+    // handleShow() {
+    //     this.setState({ show: true });
+    // }
 
     render() {
         return (
             <div>
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal show={this.props.show} onHide={this.props.hide}>
 
                     <Modal.Header closeButton>
                         <Modal.Title>Add New Request</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <requestForm/>
+                        <RequestForm />
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button onClick={this.handleClose}>Close</Button>
+                        <Button onClick={this.props.hide}>Close</Button>
                     </Modal.Footer>
 
                 </Modal>
@@ -46,4 +47,6 @@ class RequestModal extends React.Component {
     }
 }
 
-render(<RequestModal/>)
+// render(<RequestModal />);
+
+export default RequestModal;
