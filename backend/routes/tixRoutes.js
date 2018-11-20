@@ -6,6 +6,6 @@ router.route('/all')
     .get(tixController.findAll);
 
 router.route('/')
-    .post(tixController.insert);
+    .post((req,res) => tixController.insert(req.body));
 
 module.exports = router;

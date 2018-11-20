@@ -6,8 +6,8 @@ export default {
             .catch(error => console.log(error.message));
     },
 
-    newTicket: function () {
-        return axios.post('/api/')
+    newTicket: function (newTicket) {
+        return axios.post('/api/', newTicket)
             .catch(error => console.log(error.message));
     }
 };

@@ -5,18 +5,21 @@ import Table from 'react-bootstrap/lib/Table';
 import API from '../../utils/API';
 
 class Requests extends Component {
-    state = {
-        tickets: []
-        //potentially add state var arr that pulls in table header names so that these aren't hard coded
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            tickets: [],
+            case: this.props.case
+            //potentially add state var arr that pulls in table header names so that these aren't hard coded
+        }
     };
 
     componentDidMount() {
         //need to setup API and API call here to pull all users from db
         API.getAllRequests()
             .then(res => {
-                console.log(res.data)
                 this.setState({tickets: res.data});
-                console.log(this.state.tickets);
             })
     };
 

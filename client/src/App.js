@@ -9,23 +9,29 @@ class App extends Component {
     constructor(props) {
         super(props)
 
+        this.requestHandler = this.requestHandler.bind(this)
         this.modalHandler = this.modalHandler.bind(this)
         this.modalCloser = this.modalCloser.bind(this)
 
         this.state = {
-            modalState: false
+            modalState: false,
+            requestState: 1
         }
     }
 
-    modalHandler(e) {
-        e.preventDefault()
+    requestHandler() {
+        this.setState({
+            requestState: this.state.requestState*-1
+        })
+    }
+
+    modalHandler() {
         this.setState({
             modalState: true
         })
     }
 
-    modalCloser(e) {
-        e.preventDefault()
+    modalCloser() {
         this.setState({
             modalState: false
         })
@@ -36,8 +42,8 @@ class App extends Component {
             <Router>
                 <div>
                     <Header modalHandler={this.modalHandler} />
-                    <Modal show={this.state.modalState} hide={this.modalCloser} />
-                    <Route exact path='/Requests' component={Requests} />
+                    <Modal show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
+                    <Route exact path='/Requests' render={(props) => <Requests {...props} case = {this.state.requestState}/>} />
                 </div>
             </Router>
         )

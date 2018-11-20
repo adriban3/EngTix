@@ -9,10 +9,9 @@ module.exports = {
     },
 
     insert: function (req, res) {
+        
         db
-            .create(req.body)
-            .then(dbModel => res.json(dbModel), console.log('New Ticket Added to DB'))
-            .catch(err => res.status(422).json(err))
-
+            .create(req)
+            .catch(err => console.log(err))
     }
 }

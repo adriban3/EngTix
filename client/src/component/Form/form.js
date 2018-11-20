@@ -15,19 +15,6 @@ function FieldGroup({ id, label, ...props }) {
 }
 
 class RequestForm extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleChange = this.handleChange.bind(this);
-
-        this.state = {
-            value: ''
-        };
-    }
-
-    handleChange(e) {
-        this.setState({value: e.target.value});
-    }
 
     render() {
         return(
@@ -38,6 +25,9 @@ class RequestForm extends React.Component {
                     type="text"
                     label="Title:"
                     placeholder="Enter Request Title"
+                    name = "title"
+                    value = {this.props.title}
+                    onChange={this.props.handleChange}
                 />
 
                 <FieldGroup
@@ -45,12 +35,15 @@ class RequestForm extends React.Component {
                     type="text"
                     label="Requestor Name:"
                     placeholder="Enter Your Name"
+                    name = "requestor"
+                    value = {this.props.requestor}
+                    onChange={this.props.handleChange}
                 />
 
                 <FormGroup controlId="formDropdown">
                     <ControlLabel>Location:</ControlLabel>
 
-                    <FormControl componentClass="select" placeholder="Location">
+                    <FormControl componentClass="select" placeholder="Location" name = "location" value = {this.props.location} onChange = {this.props.handleChange}>
                         <option value="BUF">BUF</option>
                         <option value="FNO">FNO</option>
                         <option value="LEE">LEE</option>
@@ -61,18 +54,24 @@ class RequestForm extends React.Component {
                 </FormGroup>
 
                 <FieldGroup
-                    id="ICEScore"
+                    id="iceScore"
                     type="number"
                     label="ICE Score:"
                     placeholder="Enter Ice Score"
+                    name = "ice"
+                    value = {this.props.ice}
+                    onChange={this.props.handleChange}
                 />
 
-                <FormGroup>
+                <FormGroup
+                    controlId = "type"
+                >
+                    <ControlLabel>Type:</ControlLabel>
 
-                    <Radio name="radioGroup" inline>prod</Radio>
-                    <Radio name="radioGroup" inline>qual</Radio>
-                    <Radio name="radioGroup" inline>safe</Radio>
-                    <Radio name="radioGroup" inline>sale</Radio>
+                        <Radio name="type" inline value = 'prod' onChange = {this.props.handleChange}>prod</Radio>
+                        <Radio name="type" inline value = 'qual' onChange = {this.props.handleChange}>qual</Radio>
+                        <Radio name="type" inline value =  'safe' onChange = {this.props.handleChange}>safe</Radio>
+                        <Radio name="type" inline value =  'sale' onChange = {this.props.handleChange}>sale</Radio>
 
                 </FormGroup>
 
