@@ -5,9 +5,9 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Radio from 'react-bootstrap/lib/Radio';
 
-function FieldGroup({ id, label, ...props }) {
+function FieldGroup({ id, label, validationState, ...props }) {
     return (
-        <FormGroup controlId={id}>
+        <FormGroup controlId={id} validationState = {validationState}>
             <ControlLabel>{label}</ControlLabel>
             <FormControl {...props} />
         </FormGroup>
@@ -28,6 +28,7 @@ class RequestForm extends React.Component {
                     name = "title"
                     value = {this.props.title}
                     onChange={this.props.handleChange}
+                    validationState={this.props.titleVal}
                 />
 
                 <FieldGroup
@@ -38,9 +39,10 @@ class RequestForm extends React.Component {
                     name = "requestor"
                     value = {this.props.requestor}
                     onChange={this.props.handleChange}
+                    validationState={this.props.requestorVal}
                 />
 
-                <FormGroup controlId="formDropdown">
+                <FormGroup controlId="formDropdown" validationState={this.props.locationVal}>
                     <ControlLabel>Location:</ControlLabel>
 
                     <FormControl componentClass="select" placeholder="Location" name = "location" value = {this.props.location} onChange = {this.props.handleChange}>
@@ -61,10 +63,12 @@ class RequestForm extends React.Component {
                     name = "ice"
                     value = {this.props.ice}
                     onChange={this.props.handleChange}
+                    validationState={this.props.iceVal}
                 />
 
                 <FormGroup
                     controlId = "type"
+                    validationState = {this.props.typeVal}
                 >
                     <ControlLabel>Type:</ControlLabel>
 

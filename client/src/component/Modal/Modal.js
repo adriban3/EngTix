@@ -17,7 +17,7 @@ class RequestModal extends React.Component {
             requestor: '',
             location: '',
             ice: '',
-            type: ''
+            type: '',
         }
     }
 
@@ -60,7 +60,12 @@ class RequestModal extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <RequestForm title = {this.state.title} requestor = {this.state.requestor} location = {this.state.location} ice = {this.state.ice} type = {this.state.type} handleChange = {this.handleChange}/>
+                        <RequestForm title = {this.state.title} 
+                                     requestor = {this.state.requestor} 
+                                     location = {this.state.location} 
+                                     ice = {this.state.ice} 
+                                     type = {this.state.type} 
+                                     handleChange = {this.handleChange}/>
                     </Modal.Body>
 
                     <Modal.Footer>

@@ -9,11 +9,19 @@ class Requests extends Component {
         super(props)
 
         this.state = {
-            tickets: [],
-            case: this.props.case
+            tickets: []
             //potentially add state var arr that pulls in table header names so that these aren't hard coded
         }
     };
+
+    componentDidUpdate(prevProps) {
+        if (this.props.case !== prevProps.case) {
+            API.getAllRequests()
+                .then(res => {
+                    this.setState({tickets: res.data});
+                })
+        }
+    }
 
     componentDidMount() {
         //need to setup API and API call here to pull all users from db
