@@ -15,35 +15,45 @@ class App extends Component {
 
         this.state = {
             modalState: false,
+            formState: 0,
             requestState: 1
         }
     }
 
     requestHandler() {
         this.setState({
-            requestState: this.state.requestState*-1
+            requestState: this.state.requestState * -1
         })
     }
 
-    modalHandler() {
-        this.setState({
-            modalState: true
-        })
+    modalHandler(whichModal) {
+        whichModal === 1 ?
+            this.setState({
+                modalState: true,
+                formState: 1
+            })
+            :
+            this.setState({
+                modalState: true,
+                formState: 2
+            })
     }
 
     modalCloser() {
         this.setState({
-            modalState: false
+            modalState: false,
+            formState: 0
         })
     }
 
     render() {
         return (
             <Router>
-                <div>
+                <div className='background'>
                     <Header modalHandler={this.modalHandler} />
-                    <Modal show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
-                    <Route exact path='/Requests' render={(props) => <Requests {...props} case = {this.state.requestState}/>} />
+                    <Modal whichForm={this.state.formState} show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
+                    {/* <Route exact path='/' component={Landing} /> */}
+                    <Route exact path='/Requests' render={(props) => <Requests {...props} case={this.state.requestState} />} />
                 </div>
             </Router>
         )

@@ -5,6 +5,8 @@ import Nav from 'react-bootstrap/lib/Nav';
 // import NavItem from 'react-bootstrap/lib/NavItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import NavItem from 'react-bootstrap/lib/NavItem';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 const Header = props => (
     <Navbar inverse collapseOnSelect>
@@ -18,10 +20,13 @@ const Header = props => (
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav pullRight>
+                <NavItem eventKey={3} onClick={() => props.modalHandler(2)}>
+                    Sign Up/Sign In
+                </NavItem>
                 {/*move this over to right side and add cool three line drop down image instead of words*/}
-                <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown eventKey={3} title={<Glyphicon glyph='align-justify' />} id="basic-nav-dropdown">
                     <MenuItem eventKey={3.1} href="/Requests">View Requests</MenuItem> {/*add links inside these menu items*/}
-                    <MenuItem eventKey={3.2} onClick={props.modalHandler}>Add New Request</MenuItem>
+                    <MenuItem eventKey={3.2} onClick={() => props.modalHandler(1)}>Add New Request</MenuItem>
                     <MenuItem eventKey={3.3}>Edit Requests</MenuItem> {/*admin only*/}
                     <MenuItem eventKey={3.4}>Statistics</MenuItem> {/*admin only*/}
                     <MenuItem divider />
