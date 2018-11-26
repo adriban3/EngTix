@@ -28,7 +28,7 @@ app.use((req, res, next) => {
     console.log('req.session', req.session)
     return next();
 });
-
+//this is what you just added^^
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
