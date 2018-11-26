@@ -2,21 +2,35 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
-import {getSecret} from './secrets';
-const cors = require('cors');
-const tixRoutes = require('./routes/tixRoutes');
+import { getSecret } from './secrets';
+import cors from 'cors';
+import tixRoutes from './routes/tixRoutes';
+import session from 'express-session';
+// const cors = require('cors');
+// const tixRoutes = require('./routes/tixRoutes');
 
 const app = express();
 const router = express.Router();
 
 const API_PORT = process.env.API_PORT || 3001;
 
-mongoose.connect(getSecret('dbUri'), {useNewUrlParser: true});
+mongoose.connect(getSecret('dbUri'), { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(
+    session({
+        secret: 'HabasitAmerica',
+    })
+);
+
+app.use((req, res, next) => {
+    console.log('req.session', req.session)
+    return next();
+});
+
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 

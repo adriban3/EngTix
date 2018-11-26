@@ -9,5 +9,10 @@ export default {
     newTicket: function (newTicket) {
         return axios.post('/api/', newTicket)
             .catch(error => console.log(error.message));
+    },
+
+    newUser: function (newUser) {
+        return axios.post('/api/newUser', newUser)
+            .catch(error => console.log(error.message));
     }
 };

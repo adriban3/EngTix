@@ -1,4 +1,5 @@
 import db from '../models/ticket';
+import userDB from '../models/user';
 
 module.exports = {
     findAll: function (req, res) {
@@ -9,8 +10,14 @@ module.exports = {
     },
 
     insert: function (req, res) {
-        
+
         db
+            .create(req)
+            .catch(err => console.log(err))
+    },
+
+    userInsert: function (req, res) {
+        userDB
             .create(req)
             .catch(err => console.log(err))
     }

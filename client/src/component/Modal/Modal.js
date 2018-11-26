@@ -46,7 +46,17 @@ class RequestModal extends React.Component {
             );
         }
         else if (this.props.whichForm === 2) {
-            console.log('bepis');
+            this.props.hide(event);
+
+            API.newUser({
+                username: this.state.username,
+                password: this.state.password
+            }).then(
+                this.setState({
+                    username: '',
+                    password: ''
+                })
+            )
         }
     }
 
