@@ -25,28 +25,32 @@ class RequestModal extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.hide(event);
-        this.props.request();
+        if (this.props.whichForm === 1) {
+            this.props.hide(event);
+            this.props.request();
 
-        API.newTicket({
-            title: this.state.title,
-            requestor: this.state.requestor,
-            su: this.state.location,
-            ice: this.state.ice,
-            type: this.state.type
-        }).then(
-            this.setState({
-                title: '',
-                requestor: '',
-                su: '',
-                ice: '',
-                type: ''
-            })
-        );
+            API.newTicket({
+                title: this.state.title,
+                requestor: this.state.requestor,
+                su: this.state.location,
+                ice: this.state.ice,
+                type: this.state.type
+            }).then(
+                this.setState({
+                    title: '',
+                    requestor: '',
+                    su: '',
+                    ice: '',
+                    type: ''
+                })
+            );
+        }
+        else if (this.props.whichForm === 2) {
+            console.log('bepis');
+        }
     }
 
     handleChange = (e) => {
-        console.log(this.state.password);
         const target = e.target;
 
         this.setState({
