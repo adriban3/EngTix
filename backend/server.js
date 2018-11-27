@@ -6,6 +6,7 @@ import { getSecret } from './secrets';
 import cors from 'cors';
 import tixRoutes from './routes/tixRoutes';
 import session from 'express-session';
+import passport from './passport';
 // const cors = require('cors');
 // const tixRoutes = require('./routes/tixRoutes');
 
@@ -21,6 +22,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(
     session({
         secret: 'HabasitAmerica',
+        resave: false,
+        saveUninitialized: false
     })
 );
 
@@ -28,7 +31,11 @@ app.use((req, res, next) => {
     console.log('req.session', req.session)
     return next();
 });
-//this is what you just added^^
+
+app.use(passport.initialize())
+
+app.use(passport.session())
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
