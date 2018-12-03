@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'; //throw switch back in the mix here, removed because of console error
 import Requests from './pages/Requests';
 import Modal from './component/Modal';
+import Landing from './pages/Landing';
 
 class App extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ class App extends Component {
                 <div className='background'>
                     <Header loggedIn={this.state.loggedIn} username={this.state.username} modalHandler={this.modalHandler} />
                     <Modal loggedIn={this.handleLogin} inUp={this.state.signInState} whichForm={this.state.formState} show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
-                    {/* <Route exact path='/' component={Landing} /> */}
+                    <Route exact path='/' render={(props) => <Landing {...props} username={this.state.username} loggedIn={this.state.loggedIn} />} />
                     <Route exact path='/Requests' render={(props) => <Requests {...props} case={this.state.requestState} />} />
                 </div>
             </Router>
