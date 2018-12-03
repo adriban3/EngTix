@@ -12,11 +12,15 @@ class App extends Component {
         this.requestHandler = this.requestHandler.bind(this)
         this.modalHandler = this.modalHandler.bind(this)
         this.modalCloser = this.modalCloser.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
 
         this.state = {
             modalState: false,
             formState: 0,
-            requestState: 1
+            requestState: 1,
+            signInState: 0,
+            loggedIn: false,
+            username: ''
         }
     }
 
@@ -33,10 +37,18 @@ class App extends Component {
                 formState: 1
             })
             :
-            this.setState({
-                modalState: true,
-                formState: 2
-            })
+            whichModal === 2 ?
+                this.setState({
+                    modalState: true,
+                    formState: 2,
+                    signInState: 1
+                })
+                :
+                this.setState({
+                    modalState: true,
+                    formState: 2,
+                    signInState: 2
+                })
     }
 
     modalCloser() {
@@ -46,12 +58,21 @@ class App extends Component {
         })
     }
 
+    handleLogin(username) {
+        this.setState({
+            username,
+            loggedIn: true
+        })
+    }
+
+    //add method to redirect to '/' (landing page) when user logs in; have 'redirectTo' state in Modal component
+
     render() {
         return (
             <Router>
                 <div className='background'>
-                    <Header modalHandler={this.modalHandler} />
-                    <Modal whichForm={this.state.formState} show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
+                    <Header loggedIn={this.state.loggedIn} username={this.state.username} modalHandler={this.modalHandler} />
+                    <Modal loggedIn={this.handleLogin} inUp={this.state.signInState} whichForm={this.state.formState} show={this.state.modalState} hide={this.modalCloser} request={this.requestHandler} />
                     {/* <Route exact path='/' component={Landing} /> */}
                     <Route exact path='/Requests' render={(props) => <Requests {...props} case={this.state.requestState} />} />
                 </div>

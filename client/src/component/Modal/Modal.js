@@ -12,6 +12,7 @@ class RequestModal extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleHide = this.handleHide.bind(this);
 
         this.state = {
             title: '',
@@ -20,13 +21,15 @@ class RequestModal extends React.Component {
             ice: '',
             type: '',
             username: '',
-            password: ''
+            password: '',
+            redirectTo: ''
         }
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
+        console.log(this.props.whichForm, this.props.inUp);
         if (this.props.whichForm === 1) {
-            this.props.hide(event);
+            this.handleHide()
             this.props.request();
 
             API.newTicket({
@@ -45,18 +48,39 @@ class RequestModal extends React.Component {
                 })
             );
         }
-        else if (this.props.whichForm === 2) {
-            this.props.hide(event);
-
+        else if (this.props.whichForm === 2 && this.props.inUp === 1) {
             API.newUser({
                 username: this.state.username,
                 password: this.state.password
-            }).then(
-                this.setState({
-                    username: '',
-                    password: ''
-                })
-            )
+            }).then(response => {
+                console.log(response)
+                if (response.data) {
+                    console.log('Successful signup')
+                }
+                else {
+                    console.log('Signup error');
+                }
+            }).catch(error => console.log(error.message)).then(this.handleHide());
+        }
+
+        else if (this.props.whichForm === 2 && this.props.inUp === 2) {
+            API.login({
+                username: this.state.username,
+                password: this.state.password
+            }).then(response => {
+                console.log(response)
+                if (response.status === 200) {
+                    console.log('Successful signin')
+                    this.props.loggedIn(this.state.username)
+                    this.setState({
+                        //this should redirect to home
+                        redirectTo: '/'
+                    })
+                }
+                else {
+                    console.log('Signin error');
+                }
+            }).catch(error => console.log(error.message)).then(this.handleHide());
         }
     }
 
@@ -68,16 +92,33 @@ class RequestModal extends React.Component {
         });
     }
 
+    handleHide = () => {
+        this.props.hide();
+
+        this.setState({
+            title: '',
+            requestor: '',
+            location: '',
+            ice: '',
+            type: '',
+            username: '',
+            password: ''
+        })
+    }
+
     render() {
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.props.hide}>
+                <Modal show={this.props.show} onHide={this.handleHide}>
 
                     <Modal.Header closeButton>
                         {this.props.whichForm === 1 ?
                             <Modal.Title>Add New Request</Modal.Title>
                             :
-                            <Modal.Title>Sign Up</Modal.Title>
+                            this.props.inUp === 1 ?
+                                <Modal.Title>Sign Up</Modal.Title>
+                                :
+                                <Modal.Title>Sign In</Modal.Title>
                         }
                     </Modal.Header>
 

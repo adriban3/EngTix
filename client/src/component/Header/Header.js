@@ -20,9 +20,18 @@ const Header = props => (
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav pullRight>
-                <NavItem eventKey={3} onClick={() => props.modalHandler(2)}>
-                    Sign Up/Sign In
+                {this.props.loggedIn ?
+                    <NavItem eventKeh={3}>
+                        Welcome {this.props.username}
+                    </NavItem>
+                    :
+                    <NavItem eventKey={3} onClick={() => props.modalHandler(2)}>
+                        Sign Up
                 </NavItem>
+                    <NavItem eventKey={3} onClick={() => props.modalHandler(3)}>
+                        Sign In
+                </NavItem>
+                }
                 {/*move this over to right side and add cool three line drop down image instead of words*/}
                 <NavDropdown eventKey={3} title={<Glyphicon glyph='align-justify' />} id="basic-nav-dropdown">
                     <MenuItem eventKey={3.1} href="/Requests">View Requests</MenuItem> {/*add links inside these menu items*/}

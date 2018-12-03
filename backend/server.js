@@ -6,7 +6,7 @@ import { getSecret } from './secrets';
 import cors from 'cors';
 import tixRoutes from './routes/tixRoutes';
 import session from 'express-session';
-import passport from './passport';
+import passport from 'passport';
 // const cors = require('cors');
 // const tixRoutes = require('./routes/tixRoutes');
 

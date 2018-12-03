@@ -13,6 +13,9 @@ export default {
 
     newUser: function (newUser) {
         return axios.post('/api/newUser', newUser)
-            .catch(error => console.log(error.message));
+    },
+
+    login: function (credentials) {
+        return axios.post('/api/login', credentials)
     }
 };
