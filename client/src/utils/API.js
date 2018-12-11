@@ -17,5 +17,13 @@ export default {
 
     login: function (credentials) {
         return axios.post('/api/login', credentials)
+    },
+
+    isLoggedIn: function(username) {
+        return axios.get('/api/user', username)
+    },
+
+    logout: function(username) {
+        return axios.post('/api/logout', username)
     }
 };

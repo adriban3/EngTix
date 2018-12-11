@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './Landing.css';
 
 class Landing extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
@@ -18,3 +15,5 @@ class Landing extends Component {
         )
     }
 };
+
+export default Landing;

@@ -14,24 +14,26 @@ const Header = props => (
             {/*Want to add the habasit logo here*/}
             <Navbar.Brand>
                 {/*Change the font here, green outline, with white and black double stroke, is this possible?  Also center*/}
-                <a href="#brand">Engineering Tickets</a>
+                <a href="/">Engineering Tickets</a>
             </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav pullRight>
-                {this.props.loggedIn ?
-                    <NavItem eventKeh={3}>
-                        Welcome {this.props.username}
-                    </NavItem>
+                {props.loggedIn ? (
+                    <NavItem eventKey={3}>
+                        Welcome {props.username}
+                    </NavItem>)
                     :
-                    <NavItem eventKey={3} onClick={() => props.modalHandler(2)}>
-                        Sign Up
-                </NavItem>
-                    <NavItem eventKey={3} onClick={() => props.modalHandler(3)}>
-                        Sign In
-                </NavItem>
-                }
+                    (<Nav>
+                        <NavItem eventKey={3} onClick={() => props.modalHandler(2)}>
+                            Sign Up
+                        </NavItem>
+                        <NavItem eventKey={3} onClick={() => props.modalHandler(3)}>
+                            Sign In
+                        </NavItem>
+                    </Nav>
+                    )}
                 {/*move this over to right side and add cool three line drop down image instead of words*/}
                 <NavDropdown eventKey={3} title={<Glyphicon glyph='align-justify' />} id="basic-nav-dropdown">
                     <MenuItem eventKey={3.1} href="/Requests">View Requests</MenuItem> {/*add links inside these menu items*/}

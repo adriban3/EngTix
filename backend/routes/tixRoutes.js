@@ -25,4 +25,26 @@ router.route('/login')
         }
     ) //come back to this
 
+router.route('/user')
+        .get((req, res, next) => {
+            if (req.user) {
+                res.json({user: req.user})
+            }
+            else {
+                res.json({user: null})
+            }
+        }) //come back to this too, no way these work, how are they connecting to DB????
+
+router.route('/logout')
+        .post((req, res) => {
+            if (req.user) {
+                req.logout()
+            }
+            else {
+                res.send({msg: 'no user to log out'})
+            }
+        })
+
+
+
 module.exports = router;
