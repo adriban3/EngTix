@@ -6,9 +6,8 @@ import { getSecret } from './secrets';
 import cors from 'cors';
 import tixRoutes from './routes/tixRoutes';
 import session from 'express-session';
-import userDBConnection from './models/user';
 import passport from 'passport';
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session);
 // const cors = require('cors');
 // const tixRoutes = require('./routes/tixRoutes');
 
@@ -24,7 +23,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(
     session({
         secret: 'HabasitAmerica',
-        store: new MongoStore({ mongooseConnection: userDBConnection}),
+        store: new MongoStore({ mongooseConnection: mongoose.connection}),
         resave: false,
         saveUninitialized: false
     })

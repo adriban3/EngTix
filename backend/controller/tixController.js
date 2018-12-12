@@ -10,7 +10,6 @@ module.exports = {
     },
 
     insert: function (req, res) {
-
         db
             .create(req)
             .catch(err => console.log(err))
